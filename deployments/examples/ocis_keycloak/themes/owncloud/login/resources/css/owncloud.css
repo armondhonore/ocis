@@ -13,9 +13,13 @@
   --oc-login-background-image: url('../img/owncloud-background.png');
 }
 
-/* full-viewport branded background, same sizing as .oc-login-bg on the IDP */
+/* full-viewport branded background, same sizing as .oc-login-bg on the IDP.
+   The artwork is a full-bleed gradient with the ownCloud logo in the top-right
+   corner; cover fills the viewport edge-to-edge and the top-right anchor keeps
+   the logo from being cropped at any aspect ratio. The solid color matches the
+   artwork's darkest edge as a load-in fallback. */
 .login-pf body {
-  background: var(--oc-login-background-image) no-repeat center center fixed;
+  background: #0b294f var(--oc-login-background-image) no-repeat right top fixed;
   background-size: cover;
 }
 

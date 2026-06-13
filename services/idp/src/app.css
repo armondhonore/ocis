@@ -164,9 +164,15 @@ strong {
 
 .oc-login-bg {
   background-image: var(--oc-login-background-image, url(./images/background.jpg));
+  /* The branded background is a full-bleed gradient with the ownCloud logo in
+     the top-right corner. cover fills the viewport edge-to-edge as designed,
+     and anchoring to the top-right keeps the logo from being cropped at any
+     viewport aspect ratio; the solid color matches the artwork's darkest edge
+     as a load-in fallback. */
+  background-color: #0b294f;
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top right;
   z-index: 0;
   display: flex;
   width: 100%;
