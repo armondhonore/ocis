@@ -1,0 +1,20 @@
+application:
+  name: ocis
+  pods:
+  - name: app
+    image: owncloud/ocis:latest
+    path: /
+    servicePorts:
+    - 9200
+    vars:
+      OCIS_INSECURE: "true"
+      PROXY_HTTP_ADDR: "0.0.0.0:9200"
+      OCIS_URL: "https://relaxed-weasel-ocis.cloud.nexlayer.ai"
+      IDM_CREATE_DEMO_USERS: "false"
+    volumes:
+    - name: ocis-data
+      mountPath: /var/lib/ocis
+      size: 20Gi
+    - name: ocis-config
+      mountPath: /etc/ocis
+      size: 1Gi
