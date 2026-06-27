@@ -38,20 +38,14 @@ The agent generates this; you can edit it freely.
 application:
   name: ocis
   pods:
-    - name: main
-      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:9f0b5f0-fix5"
-      port: 9200
+    - name: app
+      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:9f0b5f0-fix6"
+      path: /
       servicePorts:
         - 9200
-      path: /
       env:
-        - name: OCIS_URL
-          value: https://relaxed-weasel-ocis.cloud.nexlayer.ai
-        - name: OCIS_INSECURE
-          value: "true"
-      health_check:
-        path: /health
-        port: 9200
+        OCIS_URL: https://relaxed-weasel-ocis.cloud.nexlayer.ai
+        OCIS_INSECURE: "true"
 ```
 
 **Common edits:**
