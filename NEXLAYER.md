@@ -39,13 +39,24 @@ application:
   name: ocis
   pods:
     - name: app
-      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:9f0b5f0-fix6"
+      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:9f0b5f0-fix7"
       path: /
       servicePorts:
         - 9200
       env:
-        OCIS_URL: https://relaxed-weasel-ocis.cloud.nexlayer.ai
-        OCIS_INSECURE: "true"
+        - name: OCIS_URL
+          value: https://relaxed-weasel-ocis.cloud.nexlayer.ai
+        - name: OCIS_INSECURE
+          value: "true"
+        - name: OCIS_STORAGE_PATH
+          value: /var/lib/ocis
+      resources:
+        limits:
+          cpu: "1"
+          memory: 2Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi
 ```
 
 **Common edits:**
