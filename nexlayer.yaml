@@ -2,7 +2,7 @@ application:
   name: ocis
   pods:
   - name: app
-    image: owncloud/ocis:latest
+    image: mirror.gcr.io/owncloud/ocis:latest
     path: /
     servicePorts:
     - 9200
