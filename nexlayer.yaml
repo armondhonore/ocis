@@ -8,6 +8,7 @@ application:
     - 9200
     vars:
       OCIS_INSECURE: "true"
+      PROXY_TLS: "false"
       PROXY_HTTP_ADDR: "0.0.0.0:9200"
       OCIS_URL: "https://relaxed-weasel-ocis.cloud.nexlayer.ai"
       IDM_CREATE_DEMO_USERS: "true"
