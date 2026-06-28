@@ -39,7 +39,7 @@ application:
   name: ocis
   pods:
   - name: app
-    image: registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:wrapper
+    image: registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:19f0ba8a04a
     path: /
     servicePorts:
     - 9200
@@ -49,13 +49,6 @@ application:
       OCIS_URL: "https://relaxed-weasel-ocis.cloud.nexlayer.ai"
       IDM_CREATE_DEMO_USERS: "true"
       IDM_ADMIN_PASSWORD: "admin"
-    volumes:
-    - name: ocis-data
-      mountPath: /var/lib/ocis
-      size: 20Gi
-    - name: ocis-config
-      mountPath: /etc/ocis
-      size: 1Gi
 ```
 
 **Common edits:**
