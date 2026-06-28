@@ -38,20 +38,24 @@ The agent generates this; you can edit it freely.
 application:
   name: ocis
   pods:
-    - name: ocis-pod
-      image: "registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:9f0b5f0-fix9"
-      servicePorts:
-        - 9200
-      path: /
-      env:
-        - name: OCIS_INSECURE
-          value: "true"
-        - name: OCIS_BOOTSTRAP_SESSIONS_ENABLED
-          value: "true"
-        - name: OCIS_STORAGE_PATH
-          value: "/var/lib/ocis"
-      healthcheck:
-        path: /
+  - name: app
+    image: registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:wrapper
+    path: /
+    servicePorts:
+    - 9200
+    vars:
+      OCIS_INSECURE: "true"
+      PROXY_HTTP_ADDR: "0.0.0.0:9200"
+      OCIS_URL: "https://relaxed-weasel-ocis.cloud.nexlayer.ai"
+      IDM_CREATE_DEMO_USERS: "true"
+      IDM_ADMIN_PASSWORD: "admin"
+    volumes:
+    - name: ocis-data
+      mountPath: /var/lib/ocis
+      size: 20Gi
+    - name: ocis-config
+      mountPath: /etc/ocis
+      size: 1Gi
 ```
 
 **Common edits:**
