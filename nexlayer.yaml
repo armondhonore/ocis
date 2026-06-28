@@ -2,9 +2,8 @@ application:
   name: ocis
   pods:
   - name: app
-    image: owncloud/ocis:8.0.5
+    image: registry.nexlayer.io/user_01kece1xyh817dwff7wnarhkxd/ocis:wrapper
     path: /
-    command: sh -c "ocis init || true; exec ocis server"
     servicePorts:
     - 9200
     vars:

@@ -1,18 +1,16 @@
-FROM mirror.gcr.io/owncloud/ocis:latest
+# Thin wrapper around the official ownCloud Infinite Scale single binary.
+# The official image's ENTRYPOINT is /usr/bin/ocis with CMD ["server"], which
+# fails on first boot because no ocis.yaml config exists yet. oCIS requires a
+# one-time `ocis init` to generate secrets before `ocis server` will start.
+# This wrapper runs init (idempotent) then exec's the server, so a fresh
+# deployment with an empty config volume comes up cleanly.
+FROM mirror.gcr.io/owncloud/ocis:8.0.5
 
-USER root
-RUN mkdir -p /var/lib/ocis && chown -R 1000:1000 /var/lib/ocis
+ENV OCIS_INSECURE="true" \
+    PROXY_HTTP_ADDR="0.0.0.0:9200" \
+    IDM_CREATE_DEMO_USERS="true" \
+    IDM_ADMIN_PASSWORD="admin"
 
-# OCIS needs a specific set of environment variables to bypass interactive setup
-# and run as a single-process gateway in a container
-ENV OCIS_INSECURE=true
-ENV OCIS_STORAGE_PATH=/var/lib/ocis
-ENV OCIS_LOG_LEVEL=info
-ENV OCIS_BOOTSTRAP_SESSIONS_ENABLED=true
-ENV OCIS_URL=https://relaxed-weasel-ocis.cloud.nexlayer.ai
-
-USER 1000
-EXPOSE 9200
-
-# The ocis server command starts the gateway which routes to all internal services
-CMD ["ocis", "server"]
+# Reset the entrypoint so our script controls startup. The official image runs
+# as a non-root user with /etc/ocis and /var/lib/ocis writable.
+ENTRYPOINT ["/bin/sh", "-c", "ocis init || true; exec ocis server"]
