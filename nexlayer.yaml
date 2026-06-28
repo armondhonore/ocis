@@ -12,10 +12,3 @@ application:
       OCIS_URL: "https://relaxed-weasel-ocis.cloud.nexlayer.ai"
       IDM_CREATE_DEMO_USERS: "true"
       IDM_ADMIN_PASSWORD: "admin"
-    volumes:
-    - name: ocis-data
-      mountPath: /var/lib/ocis
-      size: 20Gi
-    - name: ocis-config
-      mountPath: /etc/ocis
-      size: 1Gi
