@@ -12,12 +12,15 @@
 FROM mirror.gcr.io/owncloud/ocis:8.0.5
 
 ENV OCIS_INSECURE="true" \
+    PROXY_TLS="false" \
     PROXY_HTTP_ADDR="0.0.0.0:9200" \
     IDM_CREATE_DEMO_USERS="true" \
     IDM_ADMIN_PASSWORD="admin"
 
 # Generate the config (jwt_secret, machine auth, transfer secret, service
-# accounts, demo admin) into the image at build time.
+# accounts, demo admin) into the image at build time. PROXY_TLS=false is set
+# above so the proxy serves plain HTTP behind the Nexlayer edge (which
+# terminates TLS) instead of speaking TLS itself.
 RUN ocis init --insecure yes
 
 ENTRYPOINT ["/usr/bin/ocis"]
